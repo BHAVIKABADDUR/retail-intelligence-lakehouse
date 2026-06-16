@@ -1,0 +1,7 @@
+order_id,product,category,quantity,price,region
+1,Laptop,Electronics,1,800,Middle East
+2,Phone,Electronics,2,500,Asia
+3,Shirt,Fashion,3,30,Europe
+4,Shoes,Fashion,2,60,Middle East
+5,Watch,Accessories,1,120,Asia
+6,Tablet,Electronics,1,300,Europe
