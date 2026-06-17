@@ -1,4 +1,4 @@
-# RetailIQ – Retail Intelligence Lakehouse
+# RetailIQ – Retail IntelligencE System
 
 ## Overview
 RetailIQ is an end-to-end retail analytics and data engineering platform built using Python, SQL, PySpark, Databricks, and Power BI.
