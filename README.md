@@ -29,7 +29,7 @@ Gold Layer (business KPIs)
       ↓
 SQL Server Data Warehouse (Star Schema)
       ↓
-Power BI Dashboard (In Progress)
+Power BI Dashboard
 ```
 
 ## Tech Stack
@@ -41,7 +41,8 @@ Power BI Dashboard (In Progress)
 | Data Storage | CSV Lakehouse (Bronze/Silver/Gold) |
 | Data Warehouse | SQL Server (SSMS) |
 | Data Modeling | Star Schema |
-| Visualization | Power BI (in progress) |
+| Lakehouse Engine | Databricks, PySpark, Delta Lake |
+| Visualization | Power BI |
 
 ## Project Structure
 
@@ -65,12 +66,21 @@ retail-intelligence-lakehouse/
 │   ├── load_dim_date.py        # Dimension loader
 │   └── load_fact_table.py      # Fact table loader
 │
+├── notebooks/
+│   └── retailiq_lakehouse.py   # Databricks PySpark notebook
+│
 ├── sql/
 │   ├── schema/                 # Table definitions (DDL)
 │   └── analytics.sql           # Business analytics queries
 │
-├── dashboard/                  # Power BI files (in progress)
-└── docs/                       # Documentation
+├── dashboard/
+│   ├── RetailIQ_Dashboard.pbix # Power BI working file
+│   └── RetailIQ_Dashboard.png  # Dashboard screenshot
+│
+└── docs/
+    ├── databricks_architecture.png
+    ├── databricks_bronze.png
+    └── databricks_tables.png
 ```
 
 ## Dataset
@@ -124,6 +134,43 @@ Five analytical SQL queries built on the star schema:
 | Tablet | $13,893,276 |
 | Headphones | $13,517,700 |
 
+## Databricks Lakehouse Implementation
+
+The pipeline is also implemented natively in Databricks using PySpark and Delta Lake.
+
+### Databricks Architecture
+```
+raw_sales_large.csv (50,000 rows)
+          ↓
+    Bronze Layer
+    (raw ingestion via Spark)
+          ↓
+    Silver Layer (silver_sales)
+    (type casting, standardization)
+          ↓
+    Gold Layer (5 Delta tables)
+    ├── gold_revenue_by_category
+    ├── gold_revenue_by_region
+    ├── gold_top_products
+    ├── gold_customer_segment
+    └── gold_monthly_trend
+```
+
+### Databricks Screenshots
+
+**Architecture and Pipeline**
+![Databricks Architecture](docs/databricks_architecture.png)
+
+**Bronze Ingestion**
+![Bronze Layer](docs/databricks_bronze.png)
+
+**Delta Tables**
+![Delta Tables](docs/databricks_tables.png)
+
+## Dashboard Preview
+
+![RetailIQ Dashboard](dashboard/RetailIQ_Dashboard.png)
+
 ## Status
 
 | Component | Status |
@@ -133,5 +180,6 @@ Five analytical SQL queries built on the star schema:
 | SQL Server Data Warehouse | ✅ Complete |
 | Star Schema | ✅ Complete |
 | Analytics SQL Queries | ✅ Complete |
-| Power BI Dashboard | 🚧 In Progress |
-| Databricks / PySpark | ⬜ Planned |
+| Databricks PySpark Pipeline | ✅ Complete |
+| Delta Lake Tables | ✅ Complete |
+| Power BI Dashboard | ✅ Complete |
